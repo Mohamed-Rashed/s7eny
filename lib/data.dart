@@ -1,4 +1,5 @@
 import 'package:s7eny/enum.dart';
+import 'package:s7eny/models/alarm_info.dart';
 import 'models/menu_info.dart';
 
 List<MenuInfo> menuItems = [
@@ -10,4 +11,15 @@ List<MenuInfo> menuItems = [
       title: 'Timer', imageSource: 'assets/timer_icon.png'),
   MenuInfo(MenuType.stopwatch,
       title: 'Stopwatch', imageSource: 'assets/stopwatch_icon.png'),
+];
+
+List<AlarmInfo> alarms = [
+  AlarmInfo(
+      alarmDateTime: DateTime.now().add(Duration(hours: 1)),
+      title: 'Office',
+      gradientColorIndex: 0),
+  AlarmInfo(
+      alarmDateTime: DateTime.now().add(Duration(hours: 2)),
+      title: 'Sport',
+      gradientColorIndex: 1),
 ];
