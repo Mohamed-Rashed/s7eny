@@ -1,3 +1,5 @@
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:s7eny/const/colors.dart';
 import 'package:s7eny/data.dart';
@@ -29,10 +31,11 @@ class _AlarmPageState extends State<AlarmPage> {
             ),
             Expanded(
               child: ListView(
-                children: alarms.map((alarm) {
+                children: alarms.map<Widget>((alarm) {
                   var gradientColor = GradientTemplate
                       .gradientTemplate[alarm.gradientColorIndex!].colors;
                   return Container(
+                    margin: EdgeInsets.only(bottom: 32),
                     padding: EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 8,
@@ -43,6 +46,14 @@ class _AlarmPageState extends State<AlarmPage> {
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: gradientColor.last.withOpacity(0.4),
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                          offset: Offset(4, 4),
+                        ),
+                      ],
                       borderRadius: BorderRadius.all(
                         Radius.circular(24),
                       ),
@@ -108,7 +119,47 @@ class _AlarmPageState extends State<AlarmPage> {
                       ],
                     ),
                   );
-                }).toList(),
+                }).followedBy([
+                  DottedBorder(
+                    strokeWidth: 2,
+                    color: MyColor.clockOutline,
+                    borderType: BorderType.RRect,
+                    radius: Radius.circular(24),
+                    dashPattern: [5,4],
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: MyColor.clockBG,
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                      ),
+                      child: FlatButton(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 16,
+                        ),
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/add_alarm.png',
+                              scale: 1.5,
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              "Add Alarm",
+                              style: TextStyle(
+                                fontFamily: 'avenir',
+                                color: MyColor.primaryTextColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ]).toList(),
               ),
             ),
           ],
